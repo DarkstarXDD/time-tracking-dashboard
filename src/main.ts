@@ -1,12 +1,12 @@
 const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 let currentTabIndex = 0
+const numOfTabs = tabButtons.length
 
 tabButtons.forEach((tabButton, index) => {
   tabButton.addEventListener("keydown", (event) => {
     if (event instanceof KeyboardEvent) {
       const pressedKey = event.key
       currentTabIndex = index
-      console.log(currentTabIndex)
 
       switch (pressedKey) {
         case "ArrowLeft":
@@ -25,46 +25,49 @@ tabButtons.forEach((tabButton, index) => {
           selectLastTab()
           break
       }
+
+      handleTabSelect()
     }
   })
 })
 
 function selectFirstTab() {
-  tabButtons[0].focus()
+  currentTabIndex = 0
+  tabButtons[currentTabIndex].focus()
 }
 
 function selectLastTab() {
-  tabButtons[tabButtons.length - 1].focus()
+  currentTabIndex = numOfTabs - 1
+  tabButtons[currentTabIndex].focus()
 }
 
 function selectPreviousTab() {
   if (currentTabIndex === 0) {
     selectLastTab()
   } else {
-    tabButtons[currentTabIndex - 1].focus()
+    currentTabIndex--
+    tabButtons[currentTabIndex].focus()
   }
 }
 
 function selectNextTab() {
   console.log("Right Arrow Clicked!")
-  if (currentTabIndex === tabButtons.length - 1) {
+  if (currentTabIndex === numOfTabs - 1) {
     selectFirstTab()
   } else {
-    tabButtons[currentTabIndex + 1].focus()
+    currentTabIndex++
+    tabButtons[currentTabIndex].focus()
   }
 }
 
-// const isTabButtonSelected = tabButton.getAttribute("aria-selected")
-// if (isTabButtonSelected === "true") {
-//   tabButtons.setAttribute("tabindex", "0")
-// }
-
-// tabButtons.forEach((tabButton) => {
-//   if (tabButton.getAttribute("aria-selected") === "true") {
-//     console.log("This button is selected")
-//     tabButton.setAttribute("tabindex", "0")
-//   } else {
-//     console.log("This button is not selected")
-//     tabButton.setAttribute("tabindex", "-1")
-//   }
-// })
+function handleTabSelect() {
+  tabButtons.forEach((tabButton, index) => {
+    if (index === currentTabIndex) {
+      tabButton.setAttribute("aria-selected", "true")
+      tabButton.setAttribute("tabindex", "0")
+    } else {
+      tabButton.setAttribute("aria-selected", "false")
+      tabButton.setAttribute("tabindex", "-1")
+    }
+  })
+}
