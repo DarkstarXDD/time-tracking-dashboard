@@ -37,8 +37,193 @@
   </head>
 
   <body
-    class="min-h-dvh flex flex-col justify-center items-center bg-dark-blue font-body text-white"
+    class="min-h-dvh flex flex-col justify-center items-center bg-dark-blue font-body px-6 py-20 text-white"
   >
-    <main></main>
+    <main>
+      <div class="grid gap-6">
+        <div class="rounded-2xl bg-purple-dark">
+          <div
+            class="flex justify-center items-center gap-5 rounded-2xl bg-purple px-6 py-7"
+          >
+            <img
+              src="/assets/images/image-jeremy.webp"
+              width="64"
+              height="64"
+              alt=""
+              class="size-16 border-[3px] border-white rounded-full"
+            />
+            <h1 class="grid gap-1">
+              <span class="text-preset-1 text-purple-light">Report for </span>
+              <span class="text-preset-4 text-white">Jeremy Robson</span>
+            </h1>
+          </div>
+
+          <ul
+            role="tablist"
+            aria-orientation="horizontal"
+            class="flex justify-between items-center p-6"
+          >
+            <li>
+              <button
+                role="tab"
+                aria-selected="false"
+                id="tab-1"
+                data-tab="1"
+                class="text-preset-2 text-purple-light"
+              >
+                Daily
+              </button>
+            </li>
+
+            <li>
+              <button
+                role="tab"
+                aria-selected="true"
+                id="tab-2"
+                data-tab="2"
+                class="text-preset-2 text-white"
+              >
+                Weekly
+              </button>
+            </li>
+
+            <li>
+              <button
+                role="tab"
+                aria-selected="false"
+                id="tab-3"
+                data-tab="3"
+                class="text-preset-2 text-purple-light"
+              >
+                Monthly
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <section
+          role="tabpanel"
+          aria-labelledby="tab-1"
+          id="panel-1"
+          class="grid gap-6"
+        >
+          <div
+            style="background-image: url(/assets/images/icon-work.svg)"
+            class="card bg-orange pt-9 rounded-2xl bg-no-repeat bg-[length:5rem_5rem] bg-[right_8%_top_-14%]"
+          >
+            <div
+              class="grid gap-2 mb-[-3px] px-6 py-7 bg-purple-dark rounded-2xl"
+            >
+              <div class="flex justify-between items-center">
+                <h2 class="text-preset-3">Work</h2>
+                <button class="flex justify-center items-center">
+                  <svg
+                    width="21"
+                    height="5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 21 5"
+                    aria-hidden="true"
+                    focusable="false"
+                    class="w-6 h-2"
+                  >
+                    <path
+                      d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                      fill="#BBC0FF"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="flex justify-between items-center">
+                <p class="text-preset-5">32hrs</p>
+                <p class="text-preset-1 text-purple-light">Last Week - 36hrs</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          role="tabpanel"
+          aria-labelledby="tab-2"
+          id="panel-2"
+          class="grid gap-6"
+        >
+          <div
+            style="background-image: url(/assets/images/icon-work.svg)"
+            class="card bg-orange pt-9 rounded-2xl bg-no-repeat bg-[length:5rem_5rem] bg-[right_8%_top_-14%]"
+          >
+            <div
+              class="grid gap-2 mb-[-3px] px-6 py-7 bg-purple-dark rounded-2xl"
+            >
+              <div class="flex justify-between items-center">
+                <h2 class="text-preset-3">Work</h2>
+                <button class="flex justify-center items-center">
+                  <svg
+                    width="21"
+                    height="5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 21 5"
+                    aria-hidden="true"
+                    focusable="false"
+                    class="w-6 h-2"
+                  >
+                    <path
+                      d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                      fill="#BBC0FF"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="flex justify-between items-center">
+                <p class="text-preset-5">32hrs</p>
+                <p class="text-preset-1 text-purple-light">Last Week - 36hrs</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          role="tabpanel"
+          aria-labelledby="tab-3"
+          id="panel-3"
+          class="grid gap-6"
+        >
+          <div
+            style="background-image: url(/assets/images/icon-work.svg)"
+            class="card bg-orange pt-9 rounded-2xl bg-no-repeat bg-[length:5rem_5rem] bg-[right_8%_top_-14%]"
+          >
+            <div
+              class="grid gap-2 mb-[-3px] px-6 py-7 bg-purple-dark rounded-2xl"
+            >
+              <div class="flex justify-between items-center">
+                <h2 class="text-preset-3">Work</h2>
+                <button class="flex justify-center items-center">
+                  <svg
+                    width="21"
+                    height="5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 21 5"
+                    aria-hidden="true"
+                    focusable="false"
+                    class="w-6 h-2"
+                  >
+                    <path
+                      d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                      fill="#BBC0FF"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="flex justify-between items-center">
+                <p class="text-preset-5">32hrs</p>
+                <p class="text-preset-1 text-purple-light">Last Week - 36hrs</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
   </body>
 </html>
