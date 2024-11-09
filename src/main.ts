@@ -4,32 +4,43 @@ const numOfTabs = tabButtons.length
 
 tabButtons.forEach((tabButton, index) => {
   tabButton.addEventListener("keydown", (event) => {
-    if (event instanceof KeyboardEvent) {
-      const pressedKey = event.key
-      currentTabIndex = index
+    handleKeyDownOnTab(event, index)
+  })
 
-      switch (pressedKey) {
-        case "ArrowLeft":
-          selectPreviousTab()
-          break
-
-        case "ArrowRight":
-          selectNextTab()
-          break
-
-        case "Home":
-          selectFirstTab()
-          break
-
-        case "End":
-          selectLastTab()
-          break
-      }
-
-      handleTabSelect()
-    }
+  tabButton.addEventListener("click", () => {
+    handleMouseClickOnTab(index)
   })
 })
+
+function handleKeyDownOnTab(event: KeyboardEvent, index: number) {
+  const pressedKey = event.key
+  currentTabIndex = index
+
+  switch (pressedKey) {
+    case "ArrowLeft":
+      selectPreviousTab()
+      break
+
+    case "ArrowRight":
+      selectNextTab()
+      break
+
+    case "Home":
+      selectFirstTab()
+      break
+
+    case "End":
+      selectLastTab()
+      break
+  }
+
+  handleTabSelect()
+}
+
+function handleMouseClickOnTab(index: number) {
+  currentTabIndex = index
+  handleTabSelect()
+}
 
 function selectFirstTab() {
   currentTabIndex = 0
@@ -51,7 +62,6 @@ function selectPreviousTab() {
 }
 
 function selectNextTab() {
-  console.log("Right Arrow Clicked!")
   if (currentTabIndex === numOfTabs - 1) {
     selectFirstTab()
   } else {
