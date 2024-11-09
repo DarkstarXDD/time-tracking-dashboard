@@ -1,6 +1,10 @@
 const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
+const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
 let currentTabIndex = 0
 const numOfTabs = tabButtons.length
+
+// Since currentTabIndex = 0 (see above), on page load the first tab and panel will be selected.
+handleTabSelect()
 
 tabButtons.forEach((tabButton, index) => {
   tabButton.addEventListener("keydown", (event) => {
@@ -72,12 +76,13 @@ function selectNextTab() {
 
 function handleTabSelect() {
   tabButtons.forEach((tabButton, index) => {
-    if (index === currentTabIndex) {
-      tabButton.setAttribute("aria-selected", "true")
-      tabButton.setAttribute("tabindex", "0")
-    } else {
-      tabButton.setAttribute("aria-selected", "false")
-      tabButton.setAttribute("tabindex", "-1")
+    const isCurrentTabSelected = index === currentTabIndex
+
+    tabButton.setAttribute("aria-selected", isCurrentTabSelected.toString())
+    tabButton.setAttribute("tabindex", isCurrentTabSelected ? "0" : "-1")
+
+    if (tabPanels[index]) {
+      tabPanels[index].hidden = !isCurrentTabSelected
     }
   })
 }
