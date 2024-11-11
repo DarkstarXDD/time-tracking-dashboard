@@ -88,12 +88,11 @@ function handleTabSelect() {
 
     const currentPanel = tabPanels[index]
 
-    if (currentPanel) {
-      currentPanel.hidden = !isCurrentTabSelected
-
-      if (!currentPanel.hidden) {
-        populatePanelWithCards(currentPanel)
-      }
+    if (isCurrentTabSelected) {
+      currentPanel.hidden = false
+      populatePanelWithCards(currentPanel)
+    } else {
+      currentPanel.hidden = true
     }
   })
 }
