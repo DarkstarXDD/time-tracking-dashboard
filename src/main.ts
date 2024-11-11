@@ -86,13 +86,19 @@ function handleTabSelect() {
     tabButton.setAttribute("aria-selected", isCurrentTabSelected.toString())
     tabButton.setAttribute("tabindex", isCurrentTabSelected ? "0" : "-1")
 
-    if (tabPanels[index]) {
-      tabPanels[index].hidden = !isCurrentTabSelected
+    const currentPanel = tabPanels[index]
+
+    if (currentPanel) {
+      currentPanel.hidden = !isCurrentTabSelected
+
+      if (!currentPanel.hidden) {
+        populatePanelWithCards(currentPanel)
+      }
     }
   })
 }
 
-function addCards(timeframe: Timeframe) {
+function generateCardsForPanel(timeframe: Timeframe) {
   const cards = data.map((item) => {
     const cardData = {
       title: item.title,
@@ -105,9 +111,9 @@ function addCards(timeframe: Timeframe) {
   return cards.join("")
 }
 
-tabPanels.forEach((tabPanel) => {
-  const panelTimeframe = tabPanel.dataset.timeframe
-  const ul = tabPanel.querySelector("ul")
+function populatePanelWithCards(panel: HTMLElement) {
+  const panelTimeframe = panel.dataset.timeframe
+  const ul = panel.querySelector("ul")
 
   if (
     panelTimeframe &&
@@ -116,6 +122,6 @@ tabPanels.forEach((tabPanel) => {
       panelTimeframe === "weekly" ||
       panelTimeframe === "monthly")
   ) {
-    ul.innerHTML = addCards(panelTimeframe)
+    ul.innerHTML = generateCardsForPanel(panelTimeframe)
   }
-})
+}
