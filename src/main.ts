@@ -1,3 +1,4 @@
+import { z } from "zod"
 import data from "../src/data/data.json"
 import { card } from "./card"
 
@@ -7,6 +8,67 @@ const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
 let currentTabIndex = 0
 const numOfTabs = tabButtons.length
+
+// Validate the data received from the server
+function validateData() {
+  const dataSchema = z.array(
+    z.object({
+      title: z.enum([
+        "Work",
+        "Play",
+        "Study",
+        "Exercise",
+        "Social",
+        "Self Care",
+      ]),
+
+      timeframes: z.object({
+        daily: z.object({
+          current: z.number(),
+          previous: z.number(),
+        }),
+
+        weekly: z.object({
+          current: z.number(),
+          previous: z.number(),
+        }),
+
+        monthly: z.object({
+          current: z.number(),
+          previous: z.number(),
+        }),
+      }),
+    })
+  )
+  return dataSchema.parse(data)
+}
+
+const cardExtraData = {
+  Work: {
+    icon: "/assets/images/icon-work.svg",
+    color: "orange",
+  },
+  Play: {
+    icon: "/assets/images/icon-work.svg",
+    color: "aqua",
+  },
+  Study: {
+    icon: "/assets/images/icon-work.svg",
+    color: "red",
+  },
+  Exercise: {
+    icon: "/assets/images/icon-work.svg",
+    color: "green",
+  },
+  Social: {
+    icon: "/assets/images/icon-work.svg",
+    color: "purple",
+  },
+  "Self Care": {
+    icon: "/assets/images/icon-work.svg",
+    color: "yellow",
+  },
+}
 
 // Since currentTabIndex = 0 (see above), on page load the first tab and panel will be selected.
 handleTabSelect()
@@ -98,11 +160,12 @@ function handleTabSelect() {
 }
 
 function generateCardsForPanel(timeframe: Timeframe) {
-  const cards = data.map((item) => {
+  const cards = validateData().map((item) => {
     const cardData = {
       title: item.title,
       currentHours: item.timeframes[timeframe].current,
       previousHours: item.timeframes[timeframe].previous,
+      icon: cardExtraData[item.title].icon,
     }
 
     return card(cardData)

@@ -1,17 +1,25 @@
 interface CardData {
-  title: string
+  title: string // Need to fix type
   currentHours: number
   previousHours: number
+  icon: string
 }
 
-// icon: string style="background-image: url(${icon})"
+const colorVariants = {
+  Work: "bg-orange",
+  Play: "bg-aqua",
+  Study: "bg-red",
+  Exercise: "bg-green",
+  Social: "bg-violet",
+  "Self Care": "bg-yellow",
+}
 
-export function card({ title, currentHours, previousHours }: CardData) {
+export function card({ title, currentHours, previousHours, icon }: CardData) {
   return `
     <li>
       <div
-        
-        class="card bg-orange pt-9 rounded-2xl bg-no-repeat bg-[length:5rem_5rem] bg-[right_8%_top_-14%]"
+        style="background-image: url('/assets/images/icon-${title.toLowerCase().replace(" ", "-")}.svg')"
+        class="card ${colorVariants[title]} pt-9 rounded-2xl bg-no-repeat bg-[length:5rem_5rem] bg-[right_8%_top_-14%]"
       >
         <div class="grid gap-2 mb-[-3px] px-6 py-7 bg-purple-dark rounded-2xl">
           <div class="flex justify-between items-center">
