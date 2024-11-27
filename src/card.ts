@@ -38,19 +38,20 @@ export function card({
   timeframe,
 }: CardData) {
   return `
-    <li class="w-full">
+    <li>
       <div
         style="background-image: url('/assets/images/icon-${title.toLowerCase().replace(" ", "-")}.svg')"
-        class="card ${colorVariants[title]} pt-9 md:pt-12 rounded-2xl bg-no-repeat bg-[length:5rem_5rem] bg-[right_8%_top_-14%]"
+        class="card ${colorVariants[title]} pt-12 rounded-2xl bg-no-repeat bg-[length:5rem_5rem] bg-[right_8%_top_-14%]"
       >
-        <div class="grid gap-2 md:gap-6 mb-[-3px] px-6 py-7 md:p-8 bg-purple-dark rounded-2xl">
+        <div class="grid gap-6 p-8 bg-purple-dark rounded-2xl">
           <div class="flex justify-between items-center">
             <h2 class="text-preset-3">${title}</h2>
-            <button class="flex justify-center items-center">
+            <button>
               ${buttonSVG()}
             </button>
           </div>
-          <div class="flex justify-between items-center md:flex-col md:items-start md:gap-2">
+          
+          <div class="flex justify-between items-center gap-4 md:flex-col md:items-start">
             <p class="text-preset-5 md:text-preset-7">${currentHours}hrs</p>
             <p class="text-preset-1 text-purple-light">Last ${getTimeframeLabel(timeframe)} - ${previousHours}hrs</p>
           </div>

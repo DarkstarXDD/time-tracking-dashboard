@@ -4,7 +4,7 @@ export default {
   content: ["./index.html", "./src/**/*"],
   theme: {
     screens: {
-      md: "58rem",
+      md: "64rem",
     },
 
     fontFamily: {
@@ -68,8 +68,7 @@ export default {
 
     extend: {
       gridTemplateColumns: {
-        "3fr-2fr": "3fr 2fr",
-        list: "auto 1fr",
+        "auto-1fr": "auto 1fr",
       },
     },
   },
