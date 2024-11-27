@@ -1,5 +1,7 @@
-type CardData = {
-  title: string // Need to fix type
+import { z } from "zod"
+import { dataSchema } from "./main"
+
+type CardData = Pick<z.infer<typeof dataSchema>[number], "title"> & {
   currentHours: number
   previousHours: number
 }

@@ -7,37 +7,32 @@ const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
 let currentTabIndex = 0
 const numOfTabs = tabButtons.length
 
+// Zod schema for server data
+export const dataSchema = z.array(
+  z.object({
+    title: z.enum(["Work", "Play", "Study", "Exercise", "Social", "Self Care"]),
+
+    timeframes: z.object({
+      daily: z.object({
+        current: z.number(),
+        previous: z.number(),
+      }),
+
+      weekly: z.object({
+        current: z.number(),
+        previous: z.number(),
+      }),
+
+      monthly: z.object({
+        current: z.number(),
+        previous: z.number(),
+      }),
+    }),
+  })
+)
+
 // Validate the data received from the server
 function validateData() {
-  const dataSchema = z.array(
-    z.object({
-      title: z.enum([
-        "Work",
-        "Play",
-        "Study",
-        "Exercise",
-        "Social",
-        "Self Care",
-      ]),
-
-      timeframes: z.object({
-        daily: z.object({
-          current: z.number(),
-          previous: z.number(),
-        }),
-
-        weekly: z.object({
-          current: z.number(),
-          previous: z.number(),
-        }),
-
-        monthly: z.object({
-          current: z.number(),
-          previous: z.number(),
-        }),
-      }),
-    })
-  )
   return dataSchema.parse(data)
 }
 
