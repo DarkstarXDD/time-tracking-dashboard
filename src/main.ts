@@ -1,11 +1,20 @@
 import { z } from "zod"
-import data from "../src/data/data.json"
 import { card } from "./card"
 
 const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
 let currentTabIndex = 0
 const numOfTabs = tabButtons.length
+
+async function fetchData() {
+  try {
+    const fetchResponse = await fetch("../src/data/data.json")
+    const data = await fetchResponse.json()
+    return data
+  } catch (error) {
+    console.error("Error fetching data:", error)
+  }
+}
 
 // Zod schema for server data
 export const dataSchema = z.array(
@@ -32,8 +41,9 @@ export const dataSchema = z.array(
 )
 
 // Validate the data received from the server
-function validateData() {
-  return dataSchema.parse(data)
+async function validateData() {
+  const fetchedData = await fetchData()
+  return dataSchema.parse(fetchedData)
 }
 
 // Since currentTabIndex = 0 (see above), on page load the first tab and panel will be selected.
@@ -130,8 +140,11 @@ function selectNextTab() {
 
 type Timeframe = "daily" | "weekly" | "monthly"
 
-function generateCardsForPanel(timeframe: Timeframe) {
-  const cards = validateData().map((item) => {
+function generateCardsForPanel(
+  timeframe: Timeframe,
+  validatedData: z.infer<typeof dataSchema>
+) {
+  const cards = validatedData.map((item) => {
     const cardData = {
       title: item.title,
       currentHours: item.timeframes[timeframe].current,
@@ -143,7 +156,7 @@ function generateCardsForPanel(timeframe: Timeframe) {
   return cards.join("")
 }
 
-function populatePanelWithCards(panel: HTMLElement) {
+async function populatePanelWithCards(panel: HTMLElement) {
   const panelTimeframe = panel.dataset.timeframe
   const ul = panel.querySelector("ul")
 
@@ -154,6 +167,7 @@ function populatePanelWithCards(panel: HTMLElement) {
       panelTimeframe === "weekly" ||
       panelTimeframe === "monthly")
   ) {
-    ul.innerHTML = generateCardsForPanel(panelTimeframe)
+    const validatedData = await validateData()
+    ul.innerHTML = generateCardsForPanel(panelTimeframe, validatedData)
   }
 }
