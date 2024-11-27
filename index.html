@@ -39,29 +39,31 @@
   <body
     class="min-h-dvh flex flex-col justify-center items-center bg-dark-blue font-body px-6 py-20 text-white"
   >
-    <main>
-      <div class="grid gap-6">
-        <div class="rounded-2xl bg-purple-dark">
+    <main class="w-full max-w-96 md:max-w-[68rem]">
+      <div class="grid gap-6 md:grid-cols-auto-1fr">
+        <div class="rounded-2xl bg-purple-dark md:max-w-64">
           <div
-            class="flex justify-center items-center gap-5 rounded-2xl bg-purple px-6 py-7"
+            class="flex justify-center items-center gap-5 md:flex-col md:items-start md:gap-10 rounded-2xl bg-purple px-6 py-7 md:p-8"
           >
             <img
               src="/assets/images/image-jeremy.webp"
               width="64"
               height="64"
               alt=""
-              class="size-16 border-[3px] border-white rounded-full"
+              class="size-16 md:size-20 border-[3px] border-white rounded-full"
             />
             <h1 class="grid gap-1">
               <span class="text-preset-1 text-purple-light">Report for </span>
-              <span class="text-preset-4 text-white">Jeremy Robson</span>
+              <span class="text-preset-4 md:text-preset-6 text-white"
+                >Jeremy Robson</span
+              >
             </h1>
           </div>
 
           <ul
             role="tablist"
             aria-orientation="horizontal"
-            class="flex justify-between items-center p-6"
+            class="flex justify-between items-center p-6 md:flex-col md:items-start md:gap-5 md:p-8"
           >
             <li>
               <button
@@ -105,7 +107,7 @@
           data-timeframe="daily"
           class="panel"
         >
-          <ul id="panel-ul-1" class="grid gap-6"></ul>
+          <ul class="grid gap-6 md:grid-cols-3"></ul>
         </section>
 
         <section
@@ -116,7 +118,7 @@
           class="panel"
           hidden
         >
-          <ul class="grid gap-6"></ul>
+          <ul class="grid gap-6 md:grid-cols-3"></ul>
         </section>
 
         <section
@@ -127,7 +129,7 @@
           class="panel"
           hidden
         >
-          <ul class="grid gap-6"></ul>
+          <ul class="grid gap-6 md:grid-cols-3"></ul>
         </section>
       </div>
     </main>
