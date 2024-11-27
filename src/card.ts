@@ -1,9 +1,11 @@
 import { z } from "zod"
 import { dataSchema } from "./main"
+import { Timeframe } from "./main"
 
 type CardData = Pick<z.infer<typeof dataSchema>[number], "title"> & {
   currentHours: number
   previousHours: number
+  timeframe: Timeframe
 }
 
 const colorVariants = {
@@ -15,7 +17,26 @@ const colorVariants = {
   "Self Care": "bg-yellow",
 }
 
-export function card({ title, currentHours, previousHours }: CardData) {
+function getTimeframeLabel(timeframe: Timeframe) {
+  let timeframeLabel = ""
+
+  if (timeframe === "daily") {
+    timeframeLabel = "Day"
+  } else if (timeframe === "weekly") {
+    timeframeLabel = "Week"
+  } else {
+    timeframeLabel = "Month"
+  }
+
+  return timeframeLabel
+}
+
+export function card({
+  title,
+  currentHours,
+  previousHours,
+  timeframe,
+}: CardData) {
   return `
     <li>
       <div
@@ -31,7 +52,7 @@ export function card({ title, currentHours, previousHours }: CardData) {
           </div>
           <div class="flex justify-between items-center">
             <p class="text-preset-5">${currentHours}hrs</p>
-            <p class="text-preset-1 text-purple-light">Last Week - ${previousHours}hrs</p>
+            <p class="text-preset-1 text-purple-light">Last ${getTimeframeLabel(timeframe)} - ${previousHours}hrs</p>
           </div>
         </div>
       </div>

@@ -138,7 +138,7 @@ function selectNextTab() {
   }
 }
 
-type Timeframe = "daily" | "weekly" | "monthly"
+export type Timeframe = "daily" | "weekly" | "monthly"
 
 function generateCardsForPanel(
   timeframe: Timeframe,
@@ -149,6 +149,7 @@ function generateCardsForPanel(
       title: item.title,
       currentHours: item.timeframes[timeframe].current,
       previousHours: item.timeframes[timeframe].previous,
+      timeframe,
     }
 
     return card(cardData)
