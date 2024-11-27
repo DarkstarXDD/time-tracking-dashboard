@@ -8,7 +8,7 @@ const numOfTabs = tabButtons.length
 
 async function fetchData() {
   try {
-    const fetchResponse = await fetch("../src/data/data.json")
+    const fetchResponse = await fetch("/data/data.json")
     const data = await fetchResponse.json()
     return data
   } catch (error) {
