@@ -1,8 +1,7 @@
-interface CardData {
+type CardData = {
   title: string // Need to fix type
   currentHours: number
   previousHours: number
-  icon: string
 }
 
 const colorVariants = {
@@ -14,7 +13,7 @@ const colorVariants = {
   "Self Care": "bg-yellow",
 }
 
-export function card({ title, currentHours, previousHours, icon }: CardData) {
+export function card({ title, currentHours, previousHours }: CardData) {
   return `
     <li>
       <div

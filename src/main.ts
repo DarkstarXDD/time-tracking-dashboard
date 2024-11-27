@@ -2,8 +2,6 @@ import { z } from "zod"
 import data from "../src/data/data.json"
 import { card } from "./card"
 
-type Timeframe = "daily" | "weekly" | "monthly"
-
 const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
 let currentTabIndex = 0
@@ -43,45 +41,44 @@ function validateData() {
   return dataSchema.parse(data)
 }
 
-const cardExtraData = {
-  Work: {
-    icon: "/assets/images/icon-work.svg",
-    color: "orange",
-  },
-  Play: {
-    icon: "/assets/images/icon-work.svg",
-    color: "aqua",
-  },
-  Study: {
-    icon: "/assets/images/icon-work.svg",
-    color: "red",
-  },
-  Exercise: {
-    icon: "/assets/images/icon-work.svg",
-    color: "green",
-  },
-  Social: {
-    icon: "/assets/images/icon-work.svg",
-    color: "purple",
-  },
-  "Self Care": {
-    icon: "/assets/images/icon-work.svg",
-    color: "yellow",
-  },
-}
-
 // Since currentTabIndex = 0 (see above), on page load the first tab and panel will be selected.
 handleTabSelect()
+addEventListenersToTabButtons()
 
-tabButtons.forEach((tabButton, index) => {
-  tabButton.addEventListener("keydown", (event) => {
-    handleKeyDownOnTab(event, index)
-  })
+function addEventListenersToTabButtons() {
+  tabButtons.forEach((tabButton, index) => {
+    tabButton.addEventListener("keydown", (event) => {
+      handleKeyDownOnTab(event, index)
+    })
 
-  tabButton.addEventListener("click", () => {
-    handleMouseClickOnTab(index)
+    tabButton.addEventListener("click", () => {
+      handleMouseClickOnTab(index)
+    })
   })
-})
+}
+
+function handleTabSelect() {
+  tabButtons.forEach((tabButton, index) => {
+    const isCurrentTabSelected = index === currentTabIndex
+
+    tabButton.setAttribute("aria-selected", isCurrentTabSelected.toString())
+    tabButton.setAttribute("tabindex", isCurrentTabSelected ? "0" : "-1")
+
+    const currentPanel = tabPanels[index]
+
+    if (isCurrentTabSelected) {
+      currentPanel.hidden = false
+      populatePanelWithCards(currentPanel)
+    } else {
+      currentPanel.hidden = true
+    }
+  })
+}
+
+function handleMouseClickOnTab(index: number) {
+  currentTabIndex = index
+  handleTabSelect()
+}
 
 function handleKeyDownOnTab(event: KeyboardEvent, index: number) {
   const pressedKey = event.key
@@ -105,11 +102,6 @@ function handleKeyDownOnTab(event: KeyboardEvent, index: number) {
       break
   }
 
-  handleTabSelect()
-}
-
-function handleMouseClickOnTab(index: number) {
-  currentTabIndex = index
   handleTabSelect()
 }
 
@@ -141,23 +133,7 @@ function selectNextTab() {
   }
 }
 
-function handleTabSelect() {
-  tabButtons.forEach((tabButton, index) => {
-    const isCurrentTabSelected = index === currentTabIndex
-
-    tabButton.setAttribute("aria-selected", isCurrentTabSelected.toString())
-    tabButton.setAttribute("tabindex", isCurrentTabSelected ? "0" : "-1")
-
-    const currentPanel = tabPanels[index]
-
-    if (isCurrentTabSelected) {
-      currentPanel.hidden = false
-      populatePanelWithCards(currentPanel)
-    } else {
-      currentPanel.hidden = true
-    }
-  })
-}
+type Timeframe = "daily" | "weekly" | "monthly"
 
 function generateCardsForPanel(timeframe: Timeframe) {
   const cards = validateData().map((item) => {
@@ -165,7 +141,6 @@ function generateCardsForPanel(timeframe: Timeframe) {
       title: item.title,
       currentHours: item.timeframes[timeframe].current,
       previousHours: item.timeframes[timeframe].previous,
-      icon: cardExtraData[item.title].icon,
     }
 
     return card(cardData)
