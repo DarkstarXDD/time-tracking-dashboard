@@ -89,25 +89,28 @@ function handleKeyDownOnTab(event: KeyboardEvent, index: number) {
   const pressedKey = event.key
   currentTabIndex = index
 
-  switch (pressedKey) {
-    case "ArrowLeft":
-      selectPreviousTab()
-      break
+  // Make sure the handleTabSelect runs only when one of the following 4 keys is pressed
+  if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(pressedKey)) {
+    switch (pressedKey) {
+      case "ArrowLeft":
+        selectPreviousTab()
+        break
 
-    case "ArrowRight":
-      selectNextTab()
-      break
+      case "ArrowRight":
+        selectNextTab()
+        break
 
-    case "Home":
-      selectFirstTab()
-      break
+      case "Home":
+        selectFirstTab()
+        break
 
-    case "End":
-      selectLastTab()
-      break
+      case "End":
+        selectLastTab()
+        break
+    }
+
+    handleTabSelect()
   }
-
-  handleTabSelect()
 }
 
 function selectFirstTab() {
