@@ -3,11 +3,21 @@ import { card } from "./card"
 
 const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
+const tabList = document.getElementById("tab-list")
+
+let isDesktopLayout: boolean
+
+const mediaQuery = window.matchMedia("(min-width: 64rem)")
+mediaQuery.addEventListener("change", handleScreenSizeChange)
 
 type TabIndex = 0 | 1 | 2
 
 let currentTabIndex: TabIndex = getCurrentTabFromURL()
 const numOfTabs = tabButtons.length
+
+handleTabSelect()
+addEventListenersToTabButtons()
+handleScreenSizeChange()
 
 async function fetchData() {
   try {
@@ -49,9 +59,15 @@ async function validateData() {
   return dataSchema.parse(fetchedData)
 }
 
-// Since currentTabIndex = 0 (see above), on page load the first tab and panel will be selected.
-handleTabSelect()
-addEventListenersToTabButtons()
+function handleScreenSizeChange() {
+  if (mediaQuery.matches) {
+    isDesktopLayout = true
+    tabList?.setAttribute("aria-orientation", "vertical")
+  } else {
+    isDesktopLayout = false
+    tabList?.setAttribute("aria-orientation", "horizontal")
+  }
+}
 
 function addEventListenersToTabButtons() {
   tabButtons.forEach((tabButton, index) => {
@@ -120,27 +136,48 @@ function handleKeyDownOnTab(event: KeyboardEvent, index: TabIndex) {
   const pressedKey = event.key
   currentTabIndex = index
 
-  // Make sure the handleTabSelect runs only when one of the following 4 keys is pressed
-  if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(pressedKey)) {
-    switch (pressedKey) {
-      case "ArrowLeft":
-        selectPreviousTab()
-        break
+  if (!isDesktopLayout) {
+    if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(pressedKey)) {
+      switch (pressedKey) {
+        case "ArrowLeft":
+          selectPreviousTab()
+          break
 
-      case "ArrowRight":
-        selectNextTab()
-        break
+        case "ArrowRight":
+          selectNextTab()
+          break
 
-      case "Home":
-        selectFirstTab()
-        break
+        case "Home":
+          selectFirstTab()
+          break
 
-      case "End":
-        selectLastTab()
-        break
+        case "End":
+          selectLastTab()
+          break
+      }
+      handleTabSelect()
     }
+  } else {
+    if (["ArrowUp", "ArrowDown", "Home", "End"].includes(pressedKey)) {
+      switch (pressedKey) {
+        case "ArrowUp":
+          selectPreviousTab()
+          break
 
-    handleTabSelect()
+        case "ArrowDown":
+          selectNextTab()
+          break
+
+        case "Home":
+          selectFirstTab()
+          break
+
+        case "End":
+          selectLastTab()
+          break
+      }
+      handleTabSelect()
+    }
   }
 }
 
