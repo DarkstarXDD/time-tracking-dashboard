@@ -3,7 +3,10 @@ import { card } from "./card"
 
 const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
-let currentTabIndex = getCurrentTabFromURL()
+
+type TabIndex = 0 | 1 | 2
+
+let currentTabIndex: TabIndex = getCurrentTabFromURL()
 const numOfTabs = tabButtons.length
 
 async function fetchData() {
@@ -53,11 +56,11 @@ addEventListenersToTabButtons()
 function addEventListenersToTabButtons() {
   tabButtons.forEach((tabButton, index) => {
     tabButton.addEventListener("keydown", (event) => {
-      handleKeyDownOnTab(event, index)
+      handleKeyDownOnTab(event, index as TabIndex)
     })
 
     tabButton.addEventListener("click", () => {
-      handleMouseClickOnTab(index)
+      handleMouseClickOnTab(index as TabIndex)
     })
   })
 }
@@ -82,31 +85,38 @@ function handleTabSelect() {
 }
 
 function getCurrentTabFromURL() {
-  const searchParamsInstance = new URLSearchParams(location.search)
-  if (searchParamsInstance.has("tab")) {
-    const currentTabInURL = searchParamsInstance.get("tab")
-    if (currentTabInURL) {
-      return parseInt(currentTabInURL)
-    } else {
-      return 0
-    }
-  } else {
-    return 0
+  const tabNameToIndexMap: Record<string, TabIndex> = {
+    daily: 0,
+    weekly: 1,
+    monthly: 2,
   }
+
+  const searchParams = new URLSearchParams(location.search)
+  const currentTabInURL = searchParams.get("tab")
+  if (currentTabInURL && currentTabInURL in tabNameToIndexMap) {
+    return tabNameToIndexMap[currentTabInURL]
+  }
+  return 0
 }
 
 function updateURL() {
-  const searchParamsInstance = new URLSearchParams(location.search)
-  searchParamsInstance.set("tab", currentTabIndex.toString())
-  window.history.replaceState({}, "", `?${searchParamsInstance}`)
+  const tabIndexToTabNameMap: Record<TabIndex, string> = {
+    0: "daily",
+    1: "weekly",
+    2: "monthly",
+  }
+
+  const searchParams = new URLSearchParams(location.search)
+  searchParams.set("tab", tabIndexToTabNameMap[currentTabIndex])
+  window.history.replaceState({}, "", `?${searchParams}`)
 }
 
-function handleMouseClickOnTab(index: number) {
+function handleMouseClickOnTab(index: TabIndex) {
   currentTabIndex = index
   handleTabSelect()
 }
 
-function handleKeyDownOnTab(event: KeyboardEvent, index: number) {
+function handleKeyDownOnTab(event: KeyboardEvent, index: TabIndex) {
   const pressedKey = event.key
   currentTabIndex = index
 
