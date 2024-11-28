@@ -18,17 +18,12 @@ const colorVariants = {
 }
 
 function getTimeframeLabel(timeframe: Timeframe) {
-  let timeframeLabel = ""
-
-  if (timeframe === "daily") {
-    timeframeLabel = "Day"
-  } else if (timeframe === "weekly") {
-    timeframeLabel = "Week"
-  } else {
-    timeframeLabel = "Month"
+  const timeframeLabelMap = {
+    daily: "Day",
+    weekly: "Week",
+    monthly: "Month",
   }
-
-  return timeframeLabel
+  return timeframeLabelMap[timeframe]
 }
 
 export function card({
