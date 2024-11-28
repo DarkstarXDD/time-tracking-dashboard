@@ -10,7 +10,7 @@ async function fetchData() {
   try {
     const fetchResponse = await fetch("/data/data.json")
     const data = await fetchResponse.json()
-    return validateData(data)
+    return data
   } catch (error) {
     console.error("Error fetching data:", error)
   }
@@ -41,8 +41,9 @@ export const dataSchema = z.array(
 )
 
 // Validate the data received from the server
-function validateData(data: z.infer<typeof dataSchema>) {
-  return dataSchema.parse(data)
+async function validateData() {
+  const fetchedData = await fetchData()
+  return dataSchema.parse(fetchedData)
 }
 
 // Since currentTabIndex = 0 (see above), on page load the first tab and panel will be selected.
@@ -170,7 +171,7 @@ async function populatePanelWithCards(panel: HTMLElement) {
       panelTimeframe === "weekly" ||
       panelTimeframe === "monthly")
   ) {
-    const validatedData = await fetchData()
+    const validatedData = await validateData()
     ul.innerHTML = generateCardsForPanel(panelTimeframe, validatedData)
   }
 }
