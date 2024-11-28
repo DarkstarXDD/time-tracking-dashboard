@@ -3,7 +3,7 @@ import { card } from "./card"
 
 const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
-let currentTabIndex = 0
+let currentTabIndex = getCurrentTabFromURL()
 const numOfTabs = tabButtons.length
 
 async function fetchData() {
@@ -63,6 +63,7 @@ function addEventListenersToTabButtons() {
 }
 
 function handleTabSelect() {
+  updateURL()
   tabButtons.forEach((tabButton, index) => {
     const isCurrentTabSelected = index === currentTabIndex
 
@@ -78,6 +79,26 @@ function handleTabSelect() {
       currentPanel.hidden = true
     }
   })
+}
+
+function getCurrentTabFromURL() {
+  const searchParamsInstance = new URLSearchParams(location.search)
+  if (searchParamsInstance.has("tab")) {
+    const currentTabInURL = searchParamsInstance.get("tab")
+    if (currentTabInURL) {
+      return parseInt(currentTabInURL)
+    } else {
+      return 0
+    }
+  } else {
+    return 0
+  }
+}
+
+function updateURL() {
+  const searchParamsInstance = new URLSearchParams(location.search)
+  searchParamsInstance.set("tab", currentTabIndex.toString())
+  window.history.replaceState({}, "", `?${searchParamsInstance}`)
 }
 
 function handleMouseClickOnTab(index: number) {
