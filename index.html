@@ -60,42 +60,36 @@
             </h1>
           </div>
 
-          <ul
+          <div
             role="tablist"
             id="tab-list"
             aria-orientation="horizontal"
             class="flex items-center justify-between p-8 md:flex-col md:items-start md:gap-5"
           >
-            <li>
-              <button
-                role="tab"
-                id="tab-1"
-                class="tab-button text-preset-2 text-purple-light outline-white aria-selected:text-white"
-              >
-                Daily
-              </button>
-            </li>
+            <button
+              role="tab"
+              id="tab-1"
+              class="tab-button text-preset-2 text-purple-light outline-white aria-selected:text-white"
+            >
+              Daily
+            </button>
 
-            <li>
-              <button
-                role="tab"
-                id="tab-2"
-                class="tab-button text-preset-2 text-purple-light outline-white aria-selected:text-white"
-              >
-                Weekly
-              </button>
-            </li>
+            <button
+              role="tab"
+              id="tab-2"
+              class="tab-button text-preset-2 text-purple-light outline-white aria-selected:text-white"
+            >
+              Weekly
+            </button>
 
-            <li>
-              <button
-                role="tab"
-                id="tab-3"
-                class="tab-button text-preset-2 text-purple-light outline-white aria-selected:text-white"
-              >
-                Monthly
-              </button>
-            </li>
-          </ul>
+            <button
+              role="tab"
+              id="tab-3"
+              class="tab-button text-preset-2 text-purple-light outline-white aria-selected:text-white"
+            >
+              Monthly
+            </button>
+          </div>
         </div>
 
         <section
@@ -104,7 +98,7 @@
           data-timeframe="daily"
           class="panel"
         >
-          <ul class="grid gap-6 md:grid-cols-3"></ul>
+          <div class="card-container grid gap-6 md:grid-cols-3"></div>
         </section>
 
         <section
@@ -114,7 +108,7 @@
           class="panel"
           hidden
         >
-          <ul class="grid gap-6 md:grid-cols-3"></ul>
+          <div class="card-container grid gap-6 md:grid-cols-3"></div>
         </section>
 
         <section
@@ -124,7 +118,7 @@
           class="panel"
           hidden
         >
-          <ul class="grid gap-6 md:grid-cols-3"></ul>
+          <div class="card-container grid gap-6 md:grid-cols-3"></div>
         </section>
       </div>
     </main>

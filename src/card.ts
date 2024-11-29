@@ -33,7 +33,6 @@ export function card({
   timeframe,
 }: CardData) {
   return `
-    <li>
       <div
         style="background-image: url('/assets/images/icon-${title.toLowerCase().replace(" ", "-")}.svg')"
         class="card ${colorVariants[title]} pt-12 rounded-2xl bg-no-repeat bg-[length:5rem_5rem] bg-[right_8%_top_-14%]"
@@ -52,7 +51,6 @@ export function card({
           </div>
         </div>
       </div>
-    </li>
   `
 }
 

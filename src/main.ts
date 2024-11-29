@@ -230,16 +230,18 @@ function generateCardsForPanel(
 
 async function populatePanelWithCards(panel: HTMLElement) {
   const panelTimeframe = panel.dataset.timeframe
-  const ul = panel.querySelector("ul")
+  const cardContainer = panel.querySelector(".card-container")
 
   if (
-    panelTimeframe &&
-    ul &&
+    cardContainer &&
     (panelTimeframe === "daily" ||
       panelTimeframe === "weekly" ||
       panelTimeframe === "monthly")
   ) {
     const validatedData = await validateData()
-    ul.innerHTML = generateCardsForPanel(panelTimeframe, validatedData)
+    cardContainer.innerHTML = generateCardsForPanel(
+      panelTimeframe,
+      validatedData
+    )
   }
 }
