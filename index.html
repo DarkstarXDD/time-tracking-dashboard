@@ -39,22 +39,20 @@
   <body
     class="flex min-h-dvh flex-col items-center justify-center bg-dark-blue px-6 py-20 font-body text-white"
   >
-    <main class="w-full max-w-96 md:max-w-[68rem]">
-      <div class="grid gap-6 md:grid-cols-auto-1fr">
-        <div class="rounded-2xl bg-purple-dark md:max-w-64">
-          <div
-            class="flex items-center justify-center gap-5 rounded-2xl bg-purple p-8 md:flex-col md:items-start md:gap-10"
-          >
+    <main class="main">
+      <div class="wrapper-grid">
+        <div class="info-tabs-wrapper">
+          <div class="img-name-wrapper">
             <img
               src="/assets/images/image-jeremy.webp"
               width="64"
               height="64"
               alt=""
-              class="size-16 rounded-full border-[3px] border-white md:size-20"
+              class="user-avatar"
             />
-            <h1 class="grid gap-1">
-              <span class="text-preset-1 text-white">Report for </span>
-              <span class="text-preset-4 text-white md:text-preset-6">
+            <h1 class="user-name">
+              <span class="text-preset-1">Report for </span>
+              <span class="text-preset-4 md:text-preset-6">
                 Jeremy Robson
               </span>
             </h1>
@@ -98,7 +96,109 @@
           data-timeframe="daily"
           class="panel"
         >
-          <div class="card-container grid gap-6 md:grid-cols-3"></div>
+          <div class="card-container">
+            <div class="card card--work">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span class="current-hours" id="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--play">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Play</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--study">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Study</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--exercise">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Exercise</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--social">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Social</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--self-care">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Self Care</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section
@@ -108,7 +208,97 @@
           class="panel"
           hidden
         >
-          <div class="card-container grid gap-6 md:grid-cols-3"></div>
+          <div class="card-container">
+            <div class="card card--work">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--play">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--study">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--exercise">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--social">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--self-care">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section
@@ -118,7 +308,97 @@
           class="panel"
           hidden
         >
-          <div class="card-container grid gap-6 md:grid-cols-3"></div>
+          <div class="card-container">
+            <div class="card card--work">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--play">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--study">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--exercise">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--social">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--self-care">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">Work</h2>
+                  <button></button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5 md:text-preset-7">
+                    <span>0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">Last Day - 0hrs</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </main>
