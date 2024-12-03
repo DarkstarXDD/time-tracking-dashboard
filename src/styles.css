@@ -192,12 +192,24 @@
     padding: 2rem;
     background-color: hsl(235 46% 20%);
     transform-origin: bottom;
+    position: relative;
+  }
+
+  .card-content:has(.card-title-link:hover) {
+    background-color: hsl(235, 46%, 28%);
   }
 
   .card-name-button-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .card-title-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
   }
 
   .card-hours-wrapper {
