@@ -1,0 +1,301 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Rubik";
+    font-weight: 300;
+    src: local("Rubik-Light"),
+      url("/src/assets/fonts/rubik-v28-latin-300.woff2");
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    font-weight: 400;
+    src: local("Rubik-Regular"),
+      url("/src/assets/fonts/rubik-v28-latin-regular.woff2");
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    font-weight: 500;
+    src: local("Rubik-Medium"),
+      url("/src/assets/fonts/rubik-v28-latin-500.woff2");
+  }
+
+  *:focus-visible {
+    outline: 0.125rem dotted green;
+    outline-offset: 0.125rem;
+  }
+
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Rubik", sans-serif;
+    color: white;
+    background-color: hsl(226, 43%, 10%);
+    padding: 5rem 1.5rem;
+  }
+
+  .text-preset-1 {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0px;
+  }
+
+  .text-preset-2 {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0px;
+  }
+
+  .text-preset-3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0px;
+  }
+
+  .text-preset-4 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: 0px;
+  }
+
+  .text-preset-5 {
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: 0px;
+  }
+
+  .text-preset-6 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: 0px;
+  }
+
+  .text-preset-7 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0px;
+  }
+
+  .main {
+    width: 100%;
+    max-width: 24rem;
+  }
+
+  .wrapper-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .info-tabs-wrapper {
+    border-radius: 1rem;
+    background-color: hsl(235 46% 20%);
+  }
+
+  .img-name-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    border-radius: 1rem;
+    background-color: hsl(246 80% 60%);
+    padding: 2rem;
+  }
+
+  .user-avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    border-width: 3px;
+    border-color: white;
+  }
+
+  .user-name {
+    display: grid;
+    gap: 0.25rem;
+    color: white;
+  }
+
+  .tab-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1rem;
+  }
+
+  .tab-button {
+    color: hsl(236 100% 87%);
+    outline-color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 1rem;
+  }
+
+  @media (hover: hover) {
+    .tab-button:hover {
+      color: white;
+    }
+  }
+
+  @media (min-width: 24rem) {
+    .tab-list {
+      padding: 2rem;
+    }
+
+    .tab-button {
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  .tab-button[aria-selected="true"] {
+    color: white;
+    background-color: hsl(235, 46%, 28%);
+  }
+
+  .card-container {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 64rem) {
+    .main {
+      max-width: 68rem;
+    }
+
+    .wrapper-grid {
+      grid-template-columns: auto 1fr;
+      align-items: center;
+    }
+
+    .info-tabs-wrapper {
+      max-width: 16rem;
+    }
+
+    .img-name-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2.5rem;
+    }
+
+    .user-avatar {
+      width: 5rem;
+      height: 5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2.5rem;
+    }
+
+    .tab-list {
+      flex-direction: column;
+      align-items: start;
+      gap: 1.25rem;
+    }
+
+    .card-container {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .card {
+    border-radius: 1rem;
+    padding-top: 3rem;
+    background-size: 5rem 5rem;
+    background-position: right 8% top 14%;
+  }
+
+  .card--work {
+    background-color: hsl(15, 100%, 70%);
+  }
+
+  .card--play {
+    background-color: hsl(195, 74%, 62%);
+  }
+
+  .card--study {
+    background-color: hsl(348, 100%, 68%);
+  }
+
+  .card--exercise {
+    background-color: hsl(145, 58%, 55%);
+  }
+
+  .card--social {
+    background-color: hsl(264, 64%, 52%);
+  }
+
+  .card--self-care {
+    background-color: hsl(43, 83%, 65%);
+  }
+
+  .card-content {
+    display: grid;
+    gap: 1.5rem;
+    border-radius: 1rem;
+    padding: 2rem;
+    background-color: hsl(235 46% 20%);
+    transform-origin: bottom;
+    position: relative;
+  }
+
+  .card-content:has(.card-title-link:hover) {
+    background-color: hsl(235, 46%, 28%);
+  }
+
+  .card-name-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-title-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+  }
+
+  .options-button {
+    outline-color: white;
+    z-index: 2;
+  }
+
+  .options-button-icon {
+    width: 1.5rem;
+    height: 0.5rem;
+    fill: hsl(236, 100%, 87%);
+  }
+
+  .options-button:hover .options-button-icon {
+    fill: white;
+  }
+
+  .card-hours-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .card-last-hours {
+    color: hsl(236 100% 87%);
+  }
+
+  @media (min-width: 64rem) {
+    .card-hours-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}

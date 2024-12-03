@@ -42,7 +42,7 @@ function animateHours(element: Element, endHour: number) {
 let isDesktopLayout: boolean
 let isTimeAnimated = false
 
-const mediaQuery = window.matchMedia("(min-width: 64rem)")
+const mediaQuery = window.matchMedia("(min-width: 70rem)")
 mediaQuery.addEventListener("change", handleScreenSizeChange)
 
 type TabIndex = 0 | 1 | 2
