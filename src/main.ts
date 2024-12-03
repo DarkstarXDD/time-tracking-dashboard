@@ -1,63 +1,58 @@
 import { z } from "zod"
-import { card } from "./card"
+import { dataSchema, validateData } from "./fetchTimes.ts"
+import { animate, easeInOut, stagger } from "motion"
 
+const userInfo = document.body.querySelectorAll(".user-avatar, .user-name")
 const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
 const tabList = document.getElementById("tab-list")
 
+animate(
+  userInfo,
+  { opacity: [0, 1], x: [-25, 0] },
+  {
+    type: "spring",
+    damping: 15,
+    delay: stagger(0.2, { startDelay: 0.2 }),
+    ease: "easeIn",
+  }
+)
+
+animate(
+  tabButtons,
+  { opacity: [0, 1], x: [-25, 0] },
+  {
+    type: "spring",
+    damping: 15,
+    delay: stagger(0.1, { startDelay: 0.4 }),
+    ease: "easeIn",
+  }
+)
+
+function animateHours(element: Element, endHour: number) {
+  animate(0, endHour, {
+    duration: 1,
+    ease: easeInOut,
+    onUpdate: (value) => {
+      element.innerHTML = Math.round(value).toString()
+    },
+  })
+}
+
 let isDesktopLayout: boolean
+let isTimeAnimated = false
 
 const mediaQuery = window.matchMedia("(min-width: 64rem)")
 mediaQuery.addEventListener("change", handleScreenSizeChange)
 
 type TabIndex = 0 | 1 | 2
 
-let currentTabIndex: TabIndex = getCurrentTabFromURL()
+export let currentTabIndex: TabIndex = getCurrentTabFromURL()
 const numOfTabs = tabButtons.length
 
 handleTabSelect()
 addEventListenersToTabButtons()
 handleScreenSizeChange()
-
-async function fetchData() {
-  try {
-    const fetchResponse = await fetch("/data/data.json")
-    const data = await fetchResponse.json()
-    return data
-  } catch (error) {
-    console.error("Error fetching data:", error)
-  }
-}
-
-// Zod schema for server data
-export const dataSchema = z.array(
-  z.object({
-    title: z.enum(["Work", "Play", "Study", "Exercise", "Social", "Self Care"]),
-
-    timeframes: z.object({
-      daily: z.object({
-        current: z.number(),
-        previous: z.number(),
-      }),
-
-      weekly: z.object({
-        current: z.number(),
-        previous: z.number(),
-      }),
-
-      monthly: z.object({
-        current: z.number(),
-        previous: z.number(),
-      }),
-    }),
-  })
-)
-
-// Validate the data received from the server
-async function validateData() {
-  const fetchedData = await fetchData()
-  return dataSchema.parse(fetchedData)
-}
 
 function handleScreenSizeChange() {
   if (mediaQuery.matches) {
@@ -76,9 +71,39 @@ function addEventListenersToTabButtons() {
     })
 
     tabButton.addEventListener("click", () => {
-      handleMouseClickOnTab(index as TabIndex)
+      currentTabIndex = index as TabIndex
+      handleTabSelect()
     })
   })
+}
+
+function renderData(
+  cardContainer: Element,
+  timeframe: Timeframe,
+  validatedData: z.infer<typeof dataSchema>
+) {
+  Array.from(cardContainer?.children || []).forEach((card, index) => {
+    const currentHours = validatedData[index].timeframes[timeframe].current
+    const previousHours = validatedData[index].timeframes[timeframe].previous
+
+    const currentHoursEl = card.querySelector(".current-hours")
+    const previousHoursEl = card.querySelector(".previous-hours")
+
+    if (currentHoursEl) {
+      currentHoursEl.innerHTML = currentHours.toString()
+      if (!isTimeAnimated) {
+        animateHours(currentHoursEl, currentHours)
+      }
+    }
+
+    if (previousHoursEl) {
+      previousHoursEl.innerHTML = previousHours.toString()
+      if (!isTimeAnimated) {
+        animateHours(previousHoursEl, previousHours)
+      }
+    }
+  })
+  isTimeAnimated = true
 }
 
 function handleTabSelect() {
@@ -93,7 +118,7 @@ function handleTabSelect() {
 
     if (isCurrentTabSelected) {
       currentPanel.hidden = false
-      populatePanelWithCards(currentPanel)
+      updateCardData(currentPanel)
     } else {
       currentPanel.hidden = true
     }
@@ -127,108 +152,64 @@ function updateURL() {
   window.history.replaceState({}, "", `?${searchParams}`)
 }
 
-function handleMouseClickOnTab(index: TabIndex) {
-  currentTabIndex = index
-  handleTabSelect()
+function navigateTabs(action: "first" | "last" | "previous" | "next") {
+  switch (action) {
+    case "first":
+      currentTabIndex = 0
+      break
+
+    case "last":
+      currentTabIndex = numOfTabs - 1
+      break
+
+    case "previous":
+      if (currentTabIndex === 0) {
+        currentTabIndex = numOfTabs - 1
+      } else {
+        currentTabIndex = currentTabIndex - 1
+      }
+      break
+
+    case "next":
+      if (currentTabIndex === numOfTabs - 1) {
+        currentTabIndex = 0
+      } else {
+        currentTabIndex = currentTabIndex + 1
+      }
+      break
+  }
+  tabButtons[currentTabIndex].focus()
+}
+
+const keyToActionMap: Record<string, "first" | "last" | "previous" | "next"> = {
+  ArrowLeft: "previous",
+  ArrowRight: "next",
+  ArrowUp: "previous",
+  ArrowDown: "next",
+  Home: "first",
+  End: "last",
 }
 
 function handleKeyDownOnTab(event: KeyboardEvent, index: TabIndex) {
-  const pressedKey = event.key
   currentTabIndex = index
 
-  if (!isDesktopLayout) {
-    if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(pressedKey)) {
-      switch (pressedKey) {
-        case "ArrowLeft":
-          selectPreviousTab()
-          break
+  const allowedKeys = isDesktopLayout
+    ? ["ArrowUp", "ArrowDown", "Home", "End"]
+    : ["ArrowLeft", "ArrowRight", "Home", "End"]
 
-        case "ArrowRight":
-          selectNextTab()
-          break
+  const action = allowedKeys.includes(event.key)
+    ? keyToActionMap[event.key]
+    : null
 
-        case "Home":
-          selectFirstTab()
-          break
-
-        case "End":
-          selectLastTab()
-          break
-      }
-      handleTabSelect()
-    }
-  } else {
-    if (["ArrowUp", "ArrowDown", "Home", "End"].includes(pressedKey)) {
-      switch (pressedKey) {
-        case "ArrowUp":
-          selectPreviousTab()
-          break
-
-        case "ArrowDown":
-          selectNextTab()
-          break
-
-        case "Home":
-          selectFirstTab()
-          break
-
-        case "End":
-          selectLastTab()
-          break
-      }
-      handleTabSelect()
-    }
-  }
-}
-
-function selectFirstTab() {
-  currentTabIndex = 0
-  tabButtons[currentTabIndex].focus()
-}
-
-function selectLastTab() {
-  currentTabIndex = numOfTabs - 1
-  tabButtons[currentTabIndex].focus()
-}
-
-function selectPreviousTab() {
-  if (currentTabIndex === 0) {
-    selectLastTab()
-  } else {
-    currentTabIndex--
-    tabButtons[currentTabIndex].focus()
-  }
-}
-
-function selectNextTab() {
-  if (currentTabIndex === numOfTabs - 1) {
-    selectFirstTab()
-  } else {
-    currentTabIndex++
-    tabButtons[currentTabIndex].focus()
+  if (action) {
+    navigateTabs(action)
+    handleTabSelect()
   }
 }
 
 export type Timeframe = "daily" | "weekly" | "monthly"
 
-function generateCardsForPanel(
-  timeframe: Timeframe,
-  validatedData: z.infer<typeof dataSchema>
-) {
-  const cards = validatedData.map((item) => {
-    const cardData = {
-      title: item.title,
-      currentHours: item.timeframes[timeframe].current,
-      previousHours: item.timeframes[timeframe].previous,
-      timeframe,
-    }
-
-    return card(cardData)
-  })
-  return cards.join("")
-}
-
-async function populatePanelWithCards(panel: HTMLElement) {
+async function updateCardData(panel: HTMLElement) {
   const panelTimeframe = panel.dataset.timeframe
   const cardContainer = panel.querySelector(".card-container")
 
@@ -239,9 +220,6 @@ async function populatePanelWithCards(panel: HTMLElement) {
       panelTimeframe === "monthly")
   ) {
     const validatedData = await validateData()
-    cardContainer.innerHTML = generateCardsForPanel(
-      panelTimeframe,
-      validatedData
-    )
+    renderData(cardContainer, panelTimeframe, validatedData)
   }
 }
