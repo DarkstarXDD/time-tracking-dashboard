@@ -247,11 +247,26 @@
     align-items: center;
   }
 
-  .card-title-link::after {
+  .card-title-link::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: 1rem;
+  }
+
+  .options-button {
+    outline-color: white;
+    z-index: 2;
+  }
+
+  .options-button-icon {
+    width: 1.5rem;
+    height: 0.5rem;
+    fill: hsl(236, 100%, 87%);
+  }
+
+  .options-button:hover .options-button-icon {
+    fill: white;
   }
 
   .card-hours-wrapper {
