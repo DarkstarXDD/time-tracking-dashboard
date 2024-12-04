@@ -254,16 +254,17 @@ body {
   background-color: var(--clr-purple-dark);
   transform-origin: bottom;
   position: relative;
+  cursor: pointer;
+}
+
+.card-content:focus-within {
+  outline: 0.125rem dotted var(--clr-white);
 }
 
 @media (hover: hover) {
-  .card-content:has(.card-title-link:hover) {
+  .card-content:hover {
     background-color: var(--clr-purple-hover);
   }
-}
-
-.card-content:has(.card-title-link:active) {
-  background-color: var(--clr-purple-hover);
 }
 
 .card-name-button-wrapper {
@@ -272,15 +273,13 @@ body {
   align-items: center;
 }
 
-.card-title-link::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 1rem;
+.card-title-link {
+  outline: none;
 }
 
 .options-button {
   outline-color: var(--clr-white);
+  position: relative;
   z-index: 2;
 }
 

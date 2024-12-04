@@ -7,6 +7,33 @@ const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
 const tabList = document.getElementById("tab-list")
 
+const cardContentElements = document.querySelectorAll(".card-content")
+
+cardContentElements.forEach((cardContentEl) => {
+  const linkEl = cardContentEl.querySelector(".card-title-link")
+  let upTime: number
+  let downTime: number
+
+  cardContentEl.addEventListener("mousedown", () => {
+    downTime = Date.now()
+  })
+
+  cardContentEl.addEventListener("mouseup", () => {
+    upTime = Date.now()
+
+    const timeDifference = upTime - downTime
+
+    if (timeDifference < 200 && linkEl instanceof HTMLElement) {
+      linkEl.click()
+    }
+  })
+})
+
+const optionsButton = document.querySelector(".options-button")
+optionsButton?.addEventListener("click", () => {
+  console.log("Button Clicked!")
+})
+
 const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 if (!isReduced) {
