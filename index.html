@@ -57,17 +57,40 @@
           <div
             role="tablist"
             id="tab-list"
+            aria-label="timeframe tabs"
             aria-orientation="horizontal"
             class="tab-list text-preset-2"
           >
-            <button role="tab" id="tab-1" class="tab-button">Daily</button>
-            <button role="tab" id="tab-2" class="tab-button">Weekly</button>
-            <button role="tab" id="tab-3" class="tab-button">Monthly</button>
+            <button
+              role="tab"
+              id="tab-1"
+              aria-controls="tab-panel-1"
+              class="tab-button"
+            >
+              Daily
+            </button>
+            <button
+              role="tab"
+              id="tab-2"
+              aria-controls="tab-panel-2"
+              class="tab-button"
+            >
+              Weekly
+            </button>
+            <button
+              role="tab"
+              id="tab-3"
+              aria-controls="tab-panel-3"
+              class="tab-button"
+            >
+              Monthly
+            </button>
           </div>
         </div>
 
         <section
           role="tabpanel"
+          id="tab-panel-1"
           aria-labelledby="tab-1"
           data-timeframe="daily"
           class="panel"
@@ -281,6 +304,7 @@
 
         <section
           role="tabpanel"
+          id="tab-panel-2"
           aria-labelledby="tab-2"
           data-timeframe="weekly"
           class="panel"
@@ -495,6 +519,7 @@
 
         <section
           role="tabpanel"
+          id="tab-panel-3"
           aria-labelledby="tab-3"
           data-timeframe="monthly"
           class="panel"
