@@ -7,27 +7,31 @@ const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
 const tabList = document.getElementById("tab-list")
 
-animate(
-  userInfo,
-  { opacity: [0, 1], x: [-25, 0] },
-  {
-    type: "spring",
-    damping: 15,
-    delay: stagger(0.2, { startDelay: 0.2 }),
-    ease: "easeIn",
-  }
-)
+const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
-animate(
-  tabButtons,
-  { opacity: [0, 1], x: [-25, 0] },
-  {
-    type: "spring",
-    damping: 15,
-    delay: stagger(0.1, { startDelay: 0.4 }),
-    ease: "easeIn",
-  }
-)
+if (!isReduced) {
+  animate(
+    userInfo,
+    { opacity: [0, 1], x: [-25, 0] },
+    {
+      type: "spring",
+      damping: 15,
+      delay: stagger(0.2, { startDelay: 0.2 }),
+      ease: "easeIn",
+    }
+  )
+
+  animate(
+    tabButtons,
+    { opacity: [0, 1], x: [-25, 0] },
+    {
+      type: "spring",
+      damping: 15,
+      delay: stagger(0.1, { startDelay: 0.4 }),
+      ease: "easeIn",
+    }
+  )
+}
 
 function animateHours(element: Element, endHour: number) {
   animate(0, endHour, {
@@ -91,14 +95,14 @@ function renderData(
 
     if (currentHoursEl) {
       currentHoursEl.innerHTML = currentHours.toString()
-      if (!isTimeAnimated) {
+      if (!isTimeAnimated && !isReduced) {
         animateHours(currentHoursEl, currentHours)
       }
     }
 
     if (previousHoursEl) {
       previousHoursEl.innerHTML = previousHours.toString()
-      if (!isTimeAnimated) {
+      if (!isTimeAnimated && !isReduced) {
         animateHours(previousHoursEl, previousHours)
       }
     }
