@@ -36,56 +36,52 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   </head>
 
-  <body
-    class="flex min-h-dvh flex-col items-center justify-center bg-dark-blue px-6 py-20 font-body text-white"
-  >
-    <main class="w-full max-w-96 md:max-w-[68rem]">
-      <div class="grid gap-6 md:grid-cols-auto-1fr">
-        <div class="rounded-2xl bg-purple-dark md:max-w-64">
-          <div
-            class="flex items-center justify-center gap-5 rounded-2xl bg-purple p-8 md:flex-col md:items-start md:gap-10"
-          >
+  <body>
+    <main class="main">
+      <div class="wrapper-grid">
+        <div class="info-tabs-wrapper">
+          <div class="img-name-wrapper">
             <img
               src="/assets/images/image-jeremy.webp"
               width="64"
               height="64"
               alt=""
-              class="size-16 rounded-full border-[3px] border-white md:size-20"
+              class="user-avatar"
             />
-            <h1 class="grid gap-1">
-              <span class="text-preset-1 text-white">Report for </span>
-              <span class="text-preset-4 text-white md:text-preset-6">
-                Jeremy Robson
-              </span>
+            <h1 class="user-name">
+              <span class="text-preset-1">Report for </span>
+              <span class="text-preset-4"> Jeremy Robson </span>
             </h1>
           </div>
 
           <div
             role="tablist"
             id="tab-list"
+            aria-label="timeframe tabs"
             aria-orientation="horizontal"
-            class="flex items-center justify-between p-8 md:flex-col md:items-start md:gap-5"
+            class="tab-list text-preset-2"
           >
             <button
               role="tab"
               id="tab-1"
-              class="tab-button text-preset-2 text-purple-light outline-white aria-selected:text-white"
+              aria-controls="tab-panel-1"
+              class="tab-button"
             >
               Daily
             </button>
-
             <button
               role="tab"
               id="tab-2"
-              class="tab-button text-preset-2 text-purple-light outline-white aria-selected:text-white"
+              aria-controls="tab-panel-2"
+              class="tab-button"
             >
               Weekly
             </button>
-
             <button
               role="tab"
               id="tab-3"
-              class="tab-button text-preset-2 text-purple-light outline-white aria-selected:text-white"
+              aria-controls="tab-panel-3"
+              class="tab-button"
             >
               Monthly
             </button>
@@ -94,31 +90,646 @@
 
         <section
           role="tabpanel"
+          id="tab-panel-1"
           aria-labelledby="tab-1"
           data-timeframe="daily"
           class="panel"
         >
-          <div class="card-container grid gap-6 md:grid-cols-3"></div>
+          <div class="card-container">
+            <div class="card card--work">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Work</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours" id="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--play">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Play</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--study">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Study</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--exercise">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Exercise</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--social">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Social</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--self-care">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Self Care</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Day - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section
           role="tabpanel"
+          id="tab-panel-2"
           aria-labelledby="tab-2"
           data-timeframe="weekly"
           class="panel"
           hidden
         >
-          <div class="card-container grid gap-6 md:grid-cols-3"></div>
+          <div class="card-container">
+            <div class="card card--work">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Work</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Week - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--play">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Play</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Week - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--study">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Study</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Week - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--exercise">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Exercise</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Month - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--social">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Social</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Month - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--self-care">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Self Care</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Month - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section
           role="tabpanel"
+          id="tab-panel-3"
           aria-labelledby="tab-3"
           data-timeframe="monthly"
           class="panel"
           hidden
         >
-          <div class="card-container grid gap-6 md:grid-cols-3"></div>
+          <div class="card-container">
+            <div class="card card--work">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Work</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Month - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--play">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Play</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Month - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--study">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Study</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Month - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--exercise">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Exercise</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Week - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--social">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Social</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Week - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--self-care">
+              <div class="card-content">
+                <div class="card-name-button-wrapper">
+                  <h2 class="text-preset-3">
+                    <a href="#" class="card-title-link">Self Care</a>
+                  </h2>
+                  <button aria-label="options" class="options-button">
+                    <svg
+                      width="21"
+                      height="5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 21 5"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="options-button-icon"
+                    >
+                      <path
+                        d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-hours-wrapper">
+                  <p class="text-preset-5">
+                    <span class="current-hours">0</span>hrs
+                  </p>
+                  <p class="card-last-hours text-preset-1">
+                    Last Week - <span class="previous-hours">0</span>hrs
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </main>
