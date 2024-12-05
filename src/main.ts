@@ -18,7 +18,7 @@ cardContentElements.forEach((cardContentEl) => {
     downTime = Date.now()
   })
 
-  cardContentEl.addEventListener("mouseup", () => {
+  cardContentEl.addEventListener("click", () => {
     upTime = Date.now()
 
     const timeDifference = upTime - downTime
@@ -34,7 +34,6 @@ const optionsButtons = document.querySelectorAll(".options-button")
 optionsButtons.forEach((optionButton) => {
   optionButton.addEventListener("click", (event) => {
     event.stopPropagation()
-    console.log("Options Button Clicked!")
   })
 })
 

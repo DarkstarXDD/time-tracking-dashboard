@@ -280,8 +280,6 @@ body {
 
 .options-button {
   outline-color: var(--clr-white);
-  position: relative;
-  z-index: 2;
 }
 
 .options-button-icon {
