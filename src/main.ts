@@ -7,8 +7,8 @@ const tabButtons = document.body.querySelectorAll<HTMLElement>(".tab-button")
 const tabPanels = document.body.querySelectorAll<HTMLElement>(".panel")
 const tabList = document.getElementById("tab-list")
 
+// Handle Card Click
 const cardContentElements = document.querySelectorAll(".card-content")
-
 cardContentElements.forEach((cardContentEl) => {
   const linkEl = cardContentEl.querySelector(".card-title-link")
   let upTime: number
@@ -29,11 +29,16 @@ cardContentElements.forEach((cardContentEl) => {
   })
 })
 
-const optionsButton = document.querySelector(".options-button")
-optionsButton?.addEventListener("click", () => {
-  console.log("Button Clicked!")
+// Handle Options Button Click
+const optionsButtons = document.querySelectorAll(".options-button")
+optionsButtons.forEach((optionButton) => {
+  optionButton.addEventListener("click", (event) => {
+    event.stopPropagation()
+    console.log("Options Button Clicked!")
+  })
 })
 
+// Animations
 const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 if (!isReduced) {

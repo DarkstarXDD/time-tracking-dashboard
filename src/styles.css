@@ -255,9 +255,10 @@ body {
   transform-origin: bottom;
   position: relative;
   cursor: pointer;
+  margin-bottom: -4px;
 }
 
-.card-content:focus-within {
+.card-content:focus-within:not(:has(.options-button:focus)) {
   outline: 0.125rem dotted var(--clr-white);
 }
 
