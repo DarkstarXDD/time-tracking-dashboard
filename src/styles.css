@@ -262,8 +262,12 @@ body {
   outline: 0.125rem dotted var(--clr-white);
 }
 
+.card-content:active:not(:has(.options-button:active)) {
+  background-color: var(--clr-purple-hover);
+}
+
 @media (hover: hover) {
-  .card-content:hover {
+  .card-content:hover:not(:has(.options-button:hover)) {
     background-color: var(--clr-purple-hover);
   }
 }
@@ -288,8 +292,14 @@ body {
   fill: var(--clr-purple-light);
 }
 
-.options-button:hover .options-button-icon {
+.options-button:active .options-button-icon {
   fill: var(--clr-white);
+}
+
+@media (hover: hover) {
+  .options-button:hover .options-button-icon {
+    fill: var(--clr-white);
+  }
 }
 
 .card-hours-wrapper {
